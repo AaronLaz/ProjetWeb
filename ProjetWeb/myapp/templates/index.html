@@ -3,11 +3,25 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Projet Web</title>
+	<title>Cube Helper</title>
 	<link rel="stylesheet" href="{% static 'styles.css' %}">
+	<nav>
+		<a href="{% url 'homepage' %}">Home</a> |
+		<a href="{% url 'timer' %}">Timer</a> |
+		<a href="{% url 'blog' %}">Blog</a> |
+		<a href="{% url 'about' %}">About</a> |
+		<a href="{% url 'faq' %}">FAQ</a> |
+		<a href="{% url 'contact' %}">Contact</a>
+	</nav>
 </head>
 <body>
-	<h1>Title</h1>
-	<p id="test">Test</p>
+	{% block content %}
+
+	{% endblock content %}
 </body>
+<footer>
+  <p>Created by: Aaron Lazaroo</p>
+  <p>Contact information: <a href="mailto:aaron.lazaroo@etu.umontpellier.fr">
+  aaron.lazaroo@etu.umontpellier.fr</a>.</p>
+</footer>
 </html>
