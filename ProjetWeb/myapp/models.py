@@ -12,25 +12,7 @@ PUZZLE = [
     ]
 
 
-class User(models.Model):
-    userID = models.OneToOneField(User,primary_key=True, on_delete=models.CASCADE)
-    userEmail = models.EmailField()
-
-    def __str__(self):
-        return self.userID
-
-    class Meta:
-       db_table = 'user'
-
-class Admin(models.Model):
-    adminID = models.OneToOneField(User,primary_key=True, on_delete=models.CASCADE)
-    adminEmail = models.EmailField()
-
-    class Meta:
-       db_table = 'admin'       
-
 class Statistic(models.Model):
-    userID = models.ForeignKey(User, on_delete=models.CASCADE, db_column='userID')
     puzzleType = models.CharField(max_length=10,choices=PUZZLE)
     best = models.BigIntegerField(blank=True)
     average = models.BigIntegerField(blank=True)
@@ -49,7 +31,6 @@ class Scramble(models.Model):
 
 
 class BlogPost(models.Model):
-	userID =userID = models.ForeignKey(User, on_delete=models.CASCADE, db_column='userID')
 	postName = models.CharField(blank=True, max_length=20)
 	postDate = models.DateTimeField(auto_now=False, auto_now_add=False)
 
