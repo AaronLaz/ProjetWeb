@@ -5,6 +5,7 @@ from django.contrib.auth.models import User, Group
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, EmptyPage
 from myapp.models import *
+from account.models import Account
 
 # Create your views here.
 
@@ -13,7 +14,8 @@ def index(request):
 
 def homepage(request):
 	context = {}
-	context['some_string'] = "Welcome user!"
+	accounts = Account.objects.all()
+	context['accounts'] = accounts
 	return render(request,'homepage.html',context)	
 
 def timer(request):
