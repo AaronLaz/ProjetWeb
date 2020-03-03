@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User, Group
 from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, EmptyPage
+from myapp.models import *
 
 # Create your views here.
 
@@ -11,7 +12,9 @@ def index(request):
 	return render(request,'index.html')
 
 def homepage(request):
-	return render(request,'homepage.html')	
+	context = {}
+	context['some_string'] = "Welcome user!"
+	return render(request,'homepage.html',context)	
 
 def timer(request):
 	return render(request,'timer.html')	

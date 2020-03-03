@@ -4,10 +4,20 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
+PUZZLE = [
+    ("2","2x2"),
+    ("3","3x3"),
+    ("4","4x4"),
+    ("5","5x5")
+    ]
+
 
 class User(models.Model):
     userID = models.OneToOneField(User,primary_key=True, on_delete=models.CASCADE)
     userEmail = models.EmailField()
+
+    def __str__(self):
+        return self.userID
 
     class Meta:
        db_table = 'user'
@@ -21,7 +31,7 @@ class Admin(models.Model):
 
 class Statistic(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE, db_column='userID')
-    puzzleType = models.CharField(blank=True, max_length=10)
+    puzzleType = models.CharField(max_length=10,choices=PUZZLE)
     best = models.BigIntegerField(blank=True)
     average = models.BigIntegerField(blank=True)
     worst = models.BigIntegerField(blank=True)
