@@ -12,3 +12,11 @@
   color: white;
   text-align: center;
 }
+
+#help {
+	color:grey;
+}
+
+#error {
+	color:red;
+}
