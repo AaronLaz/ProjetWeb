@@ -12,6 +12,11 @@
 		<a href="{% url 'about' %}">About</a> |
 		<a href="{% url 'faq' %}">FAQ</a> |
 		<a href="{% url 'contact' %}">Contact</a>
+		{% if request.user.is_authenticated %}
+			<p>{{request.user.username}} | <a href="{% url 'logout' %}">Logout</a></p>
+		{% else %}
+			<p><a href="{% url 'register' %}">Register</a> | <a href="{% url 'login' %}">Login</a> </p>
+		{% endif %}
 	</nav>
 </head>
 <body>
@@ -20,7 +25,7 @@
 	{% endblock content %}
 </body>
 <footer id="footer">
-  <p>Created by: Aaron Lazaroo</p>
+  <p>Created by: Aaron Lazaroo | 2020</p>
   <p>Contact information: <a href="mailto:aaron.lazaroo@etu.umontpellier.fr">
   aaron.lazaroo@etu.umontpellier.fr</a>.</p>
 </footer>
