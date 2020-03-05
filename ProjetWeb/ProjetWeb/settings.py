@@ -27,6 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+if DEBUG: #dev environment
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #during development only
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Application definition
 
@@ -122,3 +126,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'cube.helper@gmail.com'
+EMAIL_HOST_PASSWORD = 'jxplvtktzuhmmylp'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Cube Helper Team <noreply@cubehelper.com>'

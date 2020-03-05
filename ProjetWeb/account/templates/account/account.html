@@ -2,19 +2,12 @@
 
 {% block content %}
 
-<h1>Edit profile</h1>
-<form method="post">
+<form class="form-signin" method="post">
 	{% csrf_token %} <!-- secure django encryption token -->
-	{% for field in account_form %}
-		<p>
-			{{field.label_tag}}
-			{{field}}
+	<h1 class="h3 mb-3 font-weight-normal">Edit Account</h1>
 
-			{% if field.help_text %}
-			<small id="help">{{field.help_text}}</small>
-			{% endif %}
-		</p>
-	{% endfor %}
+	<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus value={{account_form.initial.email}}>
+	<input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required value={{account_form.initial.username}}>
 
 	{% for field in account_form %}
 		{% for error in field.errors %}
@@ -27,8 +20,15 @@
 			<p>{{account.non_field_errors}}</p>
 		</div>
 	{% endif %}
-	<button type="submit">Submit</button>
+
+	{% if success_message %}
+		<p id="success">{{success_message}}</p>
+	{% endif %}
 	
-	
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>
+
+	<div class="d-flex flex-column">
+		<a class="m-auto" href="{% url 'password_change' %}">Change Password</a> 
+	</div>
 </form>	
 {% endblock content %}

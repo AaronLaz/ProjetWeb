@@ -3,12 +3,19 @@
 {% block content %}
 
 <div>
-	<h1>Welcome to Cube Helper!</h1>
-	<p>This is the Cube Helper website</p>
+	<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+	  <h1 class="display-4">Welcome to Cube Helper</h1>
+	  <p class="lead">Lorem ipsum dolor</p>
+	</div>
 
-	{% for account in accounts %}
-		<p>{{account}}</p>
-	{% endfor %}
+	<div class="container">
+		<div class="d-flex flex-column">
+			<h3>Registered Users</h3>
+			{% for account in accounts %}
+				<p>{{account}}</p>
+			{% endfor %}
+		</div>
+	</div>
 
 </div>
 

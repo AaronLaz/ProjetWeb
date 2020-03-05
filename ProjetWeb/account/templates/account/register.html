@@ -2,25 +2,27 @@
 
 {% block content %}
 
-<h1>Registration</h1>
-<form method="post">
-	{% csrf_token %} <!-- secure encryption token -->
+<form class="form-signin" method="post">
+	{% csrf_token %} <!-- secure django encryption token -->
+	<h1 class="h3 mb-3 font-weight-normal">Register a new account</h1>
+
+	<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+	<input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required >
+	<input type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password" required>
+	<input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Confirm Password" required>
+
 	{% for field in registration_form %}
-		<p>
-			{{field.label_tag}}
-			{{field}}
-
-			{% if field.help_text %}
-				<small id="help">{{field.help_text}}</small>
-			{% endif %}
-
-			{% for error in field.errors %}
-				<p class="error">{{error}}</p>
-			{% endfor %}
-		</p>
+		{% for error in field.errors %}
+			<p class="error">{{error}}</p>
+		{% endfor %}
 	{% endfor %}
-	<button type="submit">Register</button>
+
+	{% if registration_form.non_field_errors %}
+		<div class="error">
+			<p>{{registration.non_field_errors}}</p>
+		</div>
+	{% endif %}
 	
-	
+	<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 </form>	
 {% endblock content %}

@@ -63,7 +63,12 @@ def account_view(request):
 	if request.POST:
 		form = UpdateForm(request.POST, instanc=request.user) # form requires instance
 		if form.is_valid():
+			form.initial={
+				"email": request.POST['email'],
+				"username": request.POST['username'],
+			}
 			form.save()
+			context['success_message'] = "Changes saved successfully"
 	else:
 		form = UpdateForm(
 				initial= {
