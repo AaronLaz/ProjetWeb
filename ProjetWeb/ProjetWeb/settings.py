@@ -31,6 +31,7 @@ if DEBUG: #dev environment
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #during development only
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    
 
 # Application definition
 
@@ -42,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
-    'account'
+    'account',
+    'blog',
 ]
 
 MIDDLEWARE = [
