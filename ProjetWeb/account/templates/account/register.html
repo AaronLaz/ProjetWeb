@@ -1,9 +1,12 @@
 {% extends 'index.html' %}
-
+{% load static %}
 {% block content %}
 
 <form class="form-signin" method="post">
 	{% csrf_token %} <!-- secure django encryption token -->
+	<div class="d-flex flex-column pb-3">
+		<img class="img-fluid mx-auto d-block" src="{% static 'cube_logo.png' %}" alt="cube logo" width="72" height="72">
+	</div>
 	<h1 class="h3 mb-3 font-weight-normal">Register a new account</h1>
 
 	<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>

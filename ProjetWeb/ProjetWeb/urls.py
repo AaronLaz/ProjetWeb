@@ -15,13 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import path, include
 from myapp import views 
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 from account.views import(
         registration_view,
         logout_view,
         login_view,
         account_view,
+        must_authenticate_view,
     )
 
 urlpatterns = [
@@ -31,10 +36,11 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('faq/', views.faq, name='faq'),
     path('about/', views.about, name='about'),
-    path('blog/', views.blog, name='blog'),
+    path('blog/', include('blog.urls','blog')),
     path('register/', registration_view, name='register'),
     path('logout/', logout_view, name='logout'),
     path('login/', login_view, name='login'),
+    path('must_authenticate/', must_authenticate_view, name='must_authenticate'),
     path('account/', account_view, name='account'),
 
     # views predefined in django
@@ -45,3 +51,7 @@ urlpatterns = [
     path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
 ]
+
+if settings.DEBUG: # dev environment
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,21 +2,30 @@
 
 {% block content %}
 
-<div>
-	<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-	  <h1 class="display-4">Welcome to Cube Helper</h1>
-	  <p class="lead">Lorem ipsum dolor</p>
-	</div>
-
-	<div class="container">
-		<div class="d-flex flex-column">
-			<h3>Registered Users</h3>
-			{% for account in accounts %}
-				<p>{{account}}</p>
-			{% endfor %}
+<div class="container">
+	<div class="row">
+		<!-- Create new post bar -->
+		<div class="create-post-bar d-lg-none col-lg-7 offset-lg-1">
+			<a href="{% url 'blog:create' %}">Create Post</a> <!-- urls > blog > create -->
 		</div>
-	</div>
+		<!-- END Create new post bar -->
 
+		<!-- Blog feed -->
+		<div class="left-column col-lg-7 offset-lg-1">
+			<div class="blog-post-container">
+				
+			</div>
+		</div>
+		<!-- END Blog feed -->
+
+		<!-- Create new post -->
+		<div class="right-column col-lg-3 d-lg-flex d-none flex-column">
+			<div class="create-post-bar">
+				<a href="{% url 'blog:create' %}">Create post</a>
+			</div>
+		</div>
+		<!-- END Create new post -->
+	</div>
 </div>
 
 {% endblock content %}
