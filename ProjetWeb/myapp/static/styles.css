@@ -124,6 +124,19 @@
       margin: auto;
     }
 
-    .submit-button{
-      max-width: 200px;
-    }
+.submit-button{
+   max-width: 200px;
+}
+
+.blog-posts{
+  max-width: 500px;
+  width: 100%;
+}
+
+.card{
+  max-width: 700px;
+}
+
+.container{
+  padding: 20px;
+}
