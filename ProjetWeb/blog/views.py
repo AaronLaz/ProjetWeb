@@ -3,7 +3,7 @@ from blog.models import BlogPost
 # Create your views here.
 from blog.forms import CreateBlogPostForm, UpdateBlogPostForms
 from account.models import Account 
-
+from django.db.models import Q
 
 def create_blog_view(request):
 
@@ -15,7 +15,7 @@ def create_blog_view(request):
 	form = 	CreateBlogPostForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
 		obj = form.save(commit=False)
-		author = Account.object.filter(email=user.email).first()
+		author = Account.objects.filter(email=user.email).first()
 		obj.author = author
 		obj.save()
 		form = CreateBlogPostForm()
@@ -59,3 +59,18 @@ def edit_blog_view(request,slug):
 			)
 		context['form'] = form
 		return render(request,'blog/edit_blog.html',context)		
+
+
+def get_blog_queryset(query=None):
+	queryset = []
+	queries = query.split(" ") # split string of characters into individual words
+	for q in queries:
+		posts = BlogPost.objects.filter(
+				Q(title__icontains=q) | # Q lookup, icontains removes capitalization
+				Q(body__icontains=q)
+			).distinct()
+
+		for post in posts:
+			queryset.append(post)
+	return list(set(queryset)) # set - unique elements, list to send as return value to template
+			

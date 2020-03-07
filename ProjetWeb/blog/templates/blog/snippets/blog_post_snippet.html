@@ -1,6 +1,7 @@
+<!-- If there are posts found -->
+{% if blog_post %}
 <div class="container">
 	<div class="row">
-
 		<!-- Blog Post -->
 		<div class="card m-auto">
 			<a href="{% url 'blog:detail' post.slug %}">
@@ -25,3 +26,18 @@
 		</div>
 	</div>
 </div>
+
+{% else %}
+
+<div class="container">
+	<div class="row">
+		<div class="card m-auto">
+			<div class="card-body mt-2 mb-2">
+				<h2 class="card-title">No results found</h2>
+				<p class="card-text">No results were found matching the search: "{{query}}</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endif %}
