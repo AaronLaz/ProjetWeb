@@ -27,6 +27,7 @@ from account.views import(
         login_view,
         account_view,
         must_authenticate_view,
+        unauthorized_view,
     )
 
 urlpatterns = [
@@ -42,6 +43,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('must_authenticate/', must_authenticate_view, name='must_authenticate'),
     path('account/', account_view, name='account'),
+     path('unauthorized/', unauthorized_view, name='unauthorized'),
 
     # views predefined in django
     path('password_change/success/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_success.html'), name='password_change_done'),
