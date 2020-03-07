@@ -32,9 +32,11 @@
 					</div>
 			{% endif %}	
 			<!-- END Blog posts-->
+			<!-- Page number -->
+			{% include 'blog/snippets/blog_post_pagenum.html' with blog_posts=blog_posts %}
+			<!-- END Page number -->
 		</div>
 		<!-- END blog feed -->
-
 
 		<!-- Right 'create post' column  -->
 		<!-- If screen is small, div not displayed -->

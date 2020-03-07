@@ -1,15 +1,29 @@
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.content {
+  flex: 1 0 auto;
+}
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
   width: 100%;
   background-color: CadetBlue;
   color: white;
   text-align: center;
-  margin-top: 20px;
+  flex-shrink: 0;
 }
 
+.footer p{
+  display: block;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
 .btn{
   margin: 1px;
 }
@@ -136,7 +150,7 @@
 }
 
 .container{
-  padding: 20px;
+  padding: 5px;
 }
 
 .image {
