@@ -7,3 +7,21 @@ class CreateBlogPostForm(forms.ModelForm):
 		model = BlogPost
 		fields = ['title', 'body', 'image']
 		
+
+class UpdateBlogPostForms(forms.ModelForm):
+	
+	class Meta:
+		model = BlogPost
+		fields = ['title','body','image']
+
+	def save(self,commit=True): #custom save method for blogpost, no change to author,dates,etc
+		blog_post = self.instance
+		blog_post.title = self.cleaned_data['title']			
+		blog_post.body = self.cleaned_data['body']
+
+		if self.cleaned_data['image']: #if new image, change the existing one, else no change
+			blog_post.image = self.cleaned_data['image']
+
+		if commit:
+			blog_post.save()
+		return blog_post		

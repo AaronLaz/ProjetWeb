@@ -6,6 +6,8 @@ from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator, EmptyPage
 from myapp.models import *
 from account.models import Account
+from blog.models import BlogPost
+from operator import attrgetter
 
 # Create your views here.
 
@@ -14,8 +16,10 @@ def index(request):
 
 def homepage(request):
 	context = {}
-	accounts = Account.objects.all()
-	context['accounts'] = accounts
+	# Sort all blog posts by latest date
+	blog_posts = sorted(BlogPost.objects.all(), key=attrgetter('date_updated'),reverse=True)
+	context['blog_posts'] = blog_posts
+
 	return render(request,'homepage.html',context)	
 
 def timer(request):

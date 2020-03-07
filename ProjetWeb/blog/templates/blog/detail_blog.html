@@ -10,6 +10,10 @@
 				<div class="card-body mt-2 mb-2">
 					<h2 class="card-title">{{blog_post.title</h2>
 					<p class="card-text">{{blog_post.bod|safe}}</p> <!-- safe enables rendering of html in blog content body -->
+
+					{% if blog_post.author == request.user %}
+						<a class="btn btn-primary" href="{% url 'blog:edit' blog_post.slug %}">Edit Post</a>
+					{% endif %}
 				</div>
 				<div class="card-footer text-muted">
 					Last updated: {{blog_post.date_update}} by {{blog_post.author}}

@@ -1,31 +1,48 @@
 {% extends 'index.html' %}
-
+{% load static %}
 {% block content %}
 
 <div class="container">
 	<div class="row">
-		<!-- Create new post bar -->
-		<div class="create-post-bar d-lg-none col-lg-7 offset-lg-1">
-			<a href="{% url 'blog:create' %}">Create Post</a> <!-- urls > blog > create -->
-		</div>
-		<!-- END Create new post bar -->
 
-		<!-- Blog feed -->
+		<!-- blog feed -->
 		<div class="left-column col-lg-7 offset-lg-1">
-			<div class="blog-post-container">
-				
-			</div>
-		</div>
-		<!-- END Blog feed -->
 
-		<!-- Create new post -->
-		<div class="right-column col-lg-3 d-lg-flex d-none flex-column">
-			<div class="create-post-bar">
-				<a href="{% url 'blog:create' %}">Create post</a>
+			<!-- Top 'create post' bar -->
+			<!-- If screen size is large, div not displayed -->
+			<div class="d-lg-none mb-3">
+				<div class="card m-auto d-flex flex-column p-3">
+					<img class="img-fluid d-block m-auto pb-2" src="{% static 'cube_logo.png' %}" width="72" height="72">
+					<p class="lead">Lorem ipsum dolor</p>
+					<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Create new post</a></p>
+				</div>
 			</div>
+			<!-- END Top 'create post' bar -->
+
+			<!-- Blog posts-->
+			{% for post in blog_posts %}
+				<div class="blog-post-container">
+					{% include 'blog/snippets/blog_post_snippet.html' with blog_post=post %}
+				</div>
+			{% endfor %}
+			<!-- END Blog posts-->
 		</div>
-		<!-- END Create new post -->
+		<!-- END blog feed -->
+
+
+		<!-- Right 'create post' column  -->
+		<!-- If screen is small, div not displayed -->
+		<div class="right-column col-lg-3 d-lg-flex d-none flex-column">
+
+			<div class="card create-post-bar d-flex flex-column p-3">
+				<img class="img-fluid d-block m-auto pb-2" src="{% static 'cube_logo.png' %}" width="72" height="72">
+				<p class="lead">Lorem ipsum dolor</p>
+				<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Create new post</a></p>
+			</div>
+		
+		</div>
+		<!-- END Right 'create post' column  -->
+
 	</div>
-</div>
 
 {% endblock content %}
