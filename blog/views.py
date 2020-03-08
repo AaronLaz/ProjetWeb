@@ -10,6 +10,7 @@ def create_blog_view(request):
 
 	context ={}
 	user = request.user
+	# required admin privileges
 	if not user.is_authenticated:
 		return redirect('must_authenticate')
 
@@ -29,11 +30,13 @@ def create_blog_view(request):
 
 	return render(request,"blog/create_blog.html",context)
 
-
+# detail view of a blog post
 def detail_blog_view(request, slug):
 	context = {}
 
-	blog_post = get_object_or_404(BlogPost, slug=slug)
+	# return blog post object or error
+	blog_post = get_object_or_404(BlogPost, slug=slug) 
+	# return comments which are active and have no parent (which means it is not a reply)
 	comments = blog_post.comments.filter(active=True, parent__isnull=True)
 	if request.POST:
 		comment_form = CommentForm(data=request.POST)
@@ -50,6 +53,7 @@ def detail_blog_view(request, slug):
 					reply_comment.parent = parent_object
 			new_comment = comment_form.save(commit=False)
 			new_comment.post = blog_post
+			# save the new comment to the database
 			new_comment.save()
 			return redirect('blog:detail',slug)			
 	else:

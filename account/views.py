@@ -5,6 +5,7 @@ from blog.models import BlogPost
 from account.models import Account
 # Create your views here.
 
+# view to register new user
 def registration_view(request):
 	context = {}
 	if request.POST: # if post method
@@ -23,12 +24,12 @@ def registration_view(request):
 		context['registration_form'] = form
 	return render(request, 'account/register.html',context)				
 
-
+# view to log out
 def logout_view(request):
 	logout(request)	
 	return redirect('homepage')
 
-
+# login
 def login_view(request):
 	context = {}
 
@@ -53,7 +54,7 @@ def login_view(request):
 	context['login_form'] = form
 	return render(request,'account/login.html',context)
 
-
+# account details/edit view
 def account_view(request):
 
 	if not request.user.is_authenticated:					
@@ -61,6 +62,7 @@ def account_view(request):
 
 	context = {}
 	
+	# form to edit email and username
 	if request.POST:
 		form = update_form(request.POST, instance=request.user) # form requires instance
 		if form.is_valid():
@@ -84,16 +86,20 @@ def account_view(request):
 
 	return render(request, 'account/account.html',context)				
 
+# when user is not logged in
 def must_authenticate_view(request):
 	return render(request,'account/must_authenticate.html',{})
 
+# when user does not have required privileges
 def unauthorized_view(request):
 	return render(request,'account/unauthorized.html',{})	
 
+# admin userlist view
 def userlist(request):
 	context = {}
 	if not request.user.is_admin:
 		return redirect("unauthorized")
 	else:
+		# return all users
 		context['users'] = Account.objects.all()
 		return render(request,'account/userlist.html',context)		 

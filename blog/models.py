@@ -5,6 +5,7 @@ from django.conf import settings
 from django.dispatch import receiver
 # Create your models here.
 
+# upload location for images, TODO implement on a web server
 def upload_location(instance, filename, **kwargs):
 	file_path = 'blog/{author_id}/{title}-{filename}'.format(
 			author_id = str(instance.author.id), title=str(instance.title), filename=filename
@@ -42,8 +43,8 @@ class Comment(models.Model):
 	email = models.EmailField(max_length=45)
 	body = models.TextField()
 	date_created = models.DateTimeField(auto_now_add=True)
-	active = models.BooleanField(default=True) # admin hide
-	parent = models.ForeignKey('self',on_delete=models.CASCADE, null=True,blank=True, related_name='replies') #reply comments
+	active = models.BooleanField(default=True) # admin can choose to hide a comment
+	parent = models.ForeignKey('self',on_delete=models.CASCADE, null=True,blank=True, related_name='replies') # reply comments
 
 	class Meta:
 		ordering = ['-date_created']
