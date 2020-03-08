@@ -10,7 +10,6 @@ from blog.models import BlogPost
 from operator import attrgetter
 from blog.views import get_blog_queryset
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from pyTwistyScrambler import scrambler222, scrambler333, scrambler444, scrambler555
 import random
 
 BLOG_POSTS_PER_PAGE = 10
@@ -52,6 +51,51 @@ def scramble(request):
 
 def scrambler(request, type):
 	context ={}
+	moves_2 = ["L", "L2", "L'",
+	"R", "R2", "R'",
+	"F", "F2", "F'",
+	"B", "B2", "B'",
+	"U", "U2", "U'",
+	"D", "D2", "D'"]
+	moves_3 = ["L", "L2", "L'",
+	"R", "R2", "R'",
+	"F", "F2", "F'",
+	"B", "B2", "B'",
+	"U", "U2", "U'",
+	"D", "D2", "D'"]
+
+	moves_4 = ["L", "L2", "L'",
+	"R", "R2", "R'",
+	"F", "F2", "F'",
+	"B", "B2", "B'",
+	"U", "U2", "U'",
+	"D", "D2", "D'",
+	"f","f2","f'",
+	"b","b2","b'",
+	"u","u2","u'",
+	"d","d2","d'",
+	"r","r2","r'",
+	"l","l2","l'",
+	]
+
+	moves_5 = ["L", "L2", "L'",
+	"R", "R2", "R'",
+	"F", "F2", "F'",
+	"B", "B2", "B'",
+	"U", "U2", "U'",
+	"D", "D2", "D'",
+	"f","f2","f'",
+	"b","b2","b'",
+	"u","u2","u'",
+	"d","d2","d'",
+	"r","r2","r'",
+	"l","l2","l'",
+	"M","M2","M'",
+	"E","E2","E'",
+	"S","S2","S'",
+	]                   
+
+	scramble = []
 
 	puzzle = Puzzle.objects.get(puzzleType=type)	 
 
@@ -59,16 +103,21 @@ def scrambler(request, type):
 	if list_scrambles.count()<15:
 		if type==2:
 			strtype="2"
-			scramble = scrambler222.get_WCA_scramble()
+			for i in range(16):
+				scramble = scramble.append(random.choice(moves_2))
 		elif type==4:
 			strtype="4"
-			scramble = scrambler444.get_WCA_scramble()
+			for i in range(16):
+				scramble = scramble.append(random.choice(moves_4))
 		elif type==5:
 			strtype="5"
-			scramble = scrambler555.get_WCA_scramble()
+			for i in range(16):
+				scramble = scramble.append(random.choice(moves_5))
 		else: # default is 3x3
 			strtype="3"
-			scramble = scrambler333.get_WCA_scramble()
+			for i in range(16):
+				scramble = scramble.append(random.choice(moves_3))
+	
 
 		newscramble = Scramble(scrambleType=puzzle,scramble=scramble)
 		context['scramble'] = newscramble
@@ -83,9 +132,6 @@ def faq(request):
 
 def about(request):
 	return render(request,'about.html')	
-
-def contact(request):
-	return render(request,'contact.html')	
 
 def blog(request):
 	return render(request,'blog.html')	
