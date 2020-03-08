@@ -1,28 +1,31 @@
-html, body {
-  height: 100%;
+html {
+    position: relative;
+    min-height: 100%;
 }
+
 body {
-  display: flex;
-  flex-direction: column;
-}
-.content {
-  flex: 1 0 auto;
+    margin: 0 0 100px;
+    /* bottom = footer height */
+    padding: 25px;
 }
 
 .footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
   width: 100%;
+  height: 50px;
   background-color: CadetBlue;
   color: white;
   text-align: center;
-  flex-shrink: 0;
 }
 
 .footer p{
   display: block;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 .btn{
   margin: 1px;

@@ -28,11 +28,3 @@ class Scramble(models.Model):
 
 	class Meta:
 		db_table = 'scramble'
-
-
-class BlogPost(models.Model):
-	postName = models.CharField(blank=True, max_length=20)
-	postDate = models.DateTimeField(auto_now=False, auto_now_add=False)
-
-	class Meta:
-		db_table = 'blogpost'

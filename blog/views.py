@@ -50,7 +50,7 @@ def edit_blog_view(request, slug):
 
 	if request.POST:
 		form = UpdateBlogPostForm(request.POST or None, request.FILES or None,instance=blog_post)
-		if form.is_valid:
+		if form.is_valid():
 			obj = form.save(commit=False) # load parameters into form, giving access to cleaned data
 			obj.save()
 			context['success_message'] = "Post successfully updated"
