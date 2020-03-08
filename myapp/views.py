@@ -95,28 +95,27 @@ def scrambler(request, type):
 	"S","S2","S'",
 	]                   
 
-	scramble = []
-
+	scramble=""
 	puzzle = Puzzle.objects.get(puzzleType=type)	 
 
 	list_scrambles = Scramble.objects.all().filter(scrambleType=puzzle)
 	if list_scrambles.count()<15:
 		if type==2:
 			strtype="2"
-			for i in range(16):
-				scramble = scramble.append(random.choice(moves_2))
+			for i in range(15):
+				scramble = scramble + " " + random.choice(moves_2)
 		elif type==4:
 			strtype="4"
-			for i in range(16):
-				scramble = scramble.append(random.choice(moves_4))
+			for i in range(15):
+				scramble = scramble + " " + random.choice(moves_4)
 		elif type==5:
 			strtype="5"
-			for i in range(16):
-				scramble = scramble.append(random.choice(moves_5))
+			for i in range(15):
+				scramble = scramble + " " + random.choice(moves_5)
 		else: # default is 3x3
 			strtype="3"
-			for i in range(16):
-				scramble = scramble.append(random.choice(moves_3))
+			for i in range(15):
+				scramble = scramble + " " + random.choice(moves_3)
 	
 
 		newscramble = Scramble(scrambleType=puzzle,scramble=scramble)
