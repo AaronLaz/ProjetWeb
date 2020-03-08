@@ -12,7 +12,8 @@ from blog.views import get_blog_queryset
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 import random
 
-BLOG_POSTS_PER_PAGE = 10
+# number of posts displayed on a page
+BLOG_POSTS_PER_PAGE = 4
 
 # Create your views here.
 
@@ -96,12 +97,16 @@ def scrambler(request, type):
 	]                   
 
 	scramble=""
+	# Retrieve the puzzle object of the type given
 	puzzle = Puzzle.objects.get(puzzleType=type)	 
 
+	# Retrieve all scrambles for the puzzletype
 	list_scrambles = Scramble.objects.all().filter(scrambleType=puzzle)
+	# max number of scrambles 15
 	if list_scrambles.count()<15:
 		if type==2:
 			strtype="2"
+			# One scramble consists of 15 moves
 			for i in range(15):
 				scramble = scramble + " " + random.choice(moves_2)
 		elif type==4:
@@ -117,17 +122,23 @@ def scrambler(request, type):
 			for i in range(15):
 				scramble = scramble + " " + random.choice(moves_3)
 	
-
+		# instanciate a new scramble
 		newscramble = Scramble(scrambleType=puzzle,scramble=scramble)
+		# add to context
 		context['scramble'] = newscramble
+		# save the scramble object in the database
 		newscramble.save()
 	else:
+		# if there is already 15 scrambles in the database, retrieve a random scramble
+		# prevent creating infinite objects in the database
 		context['scramble'] = random.choice(list_scrambles)				
 
 	return render(request,'scramble.html',context)		
 
+# FAQ page view
 def faq(request):
 	return render(request,'faq.html')
 
+# About page view
 def about(request):
 	return render(request,'about.html')	
