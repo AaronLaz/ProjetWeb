@@ -14,7 +14,11 @@
 				<div class="card m-auto d-flex flex-column p-3">
 					<img class="img-fluid d-block m-auto pb-2" src="{% static 'cube_logo.png' %}" width="72" height="72">
 					<p class="lead">Lorem ipsum dolor</p>
-					<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Create new post</a></p>
+					{% if user.is_admin %}
+						<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Create new post</a></p>
+					{% else %}
+						<p class="m-auto">Our staff manages the blog posts</p>
+					{% endif %}
 				</div>
 			</div>
 			<!-- END Top 'create post' bar -->
@@ -45,7 +49,11 @@
 			<div class="card create-post-bar d-flex flex-column p-3">
 				<img class="img-fluid d-block m-auto pb-2" src="{% static 'cube_logo.png' %}" width="72" height="72">
 				<p class="lead">Lorem ipsum dolor</p>
-				<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Create new post</a></p>
+				{% if user.is_admin %}
+					<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Create new post</a></p>
+				{% else %}
+					<p class="m-auto">Our staff manages the blog posts</p>
+				{% endif %}
 			</div>
 		
 		</div>

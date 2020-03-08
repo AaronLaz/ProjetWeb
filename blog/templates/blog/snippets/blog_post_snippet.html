@@ -13,7 +13,7 @@
 					<h2 class="card-title">{{blog_post.title}}</h2>
 				</a>
 				<!-- Safe, users can include html tags, etc, vulnerable to security risks -->
-				<p class="card-text">{{blog_post.body|safe|truncatechars:300}}</p>
+				<p class="card-text">{{blog_post.body|truncatechars:300}}</p>
 				<p>
 				{% if blog_post.author == request.user %}
 					<a href="{% url 'blog:edit' blog_post.slug %}" class="btn btn-primary">Edit Post</a>

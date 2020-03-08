@@ -13,6 +13,9 @@ def create_blog_view(request):
 	if not user.is_authenticated:
 		return redirect('must_authenticate')
 
+	if not user.is_admin:
+		return redirect("unauthorized")	
+
 	form = 	CreateBlogPostForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
 		obj = form.save(commit=False)
