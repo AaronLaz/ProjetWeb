@@ -8,7 +8,7 @@ class CreateBlogPostForm(forms.ModelForm):
 		fields = ['title', 'body', 'image']
 		
 
-class UpdateBlogPostForms(forms.ModelForm):
+class UpdateBlogPostForm(forms.ModelForm):
 	
 	class Meta:
 		model = BlogPost

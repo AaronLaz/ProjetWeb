@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from blog.models import BlogPost
 # Create your views here.
-from blog.forms import CreateBlogPostForm, UpdateBlogPostForms
+from blog.forms import CreateBlogPostForm, UpdateBlogPostForm
 from account.models import Account 
 from django.db.models import Q
 from django.http import HttpResponse
@@ -26,7 +26,7 @@ def create_blog_view(request):
 	return render(request,"blog/create_blog.html",context)
 
 
-def detail_blog_view(request):
+def detail_blog_view(request, slug):
 	context = {}
 
 	blog_post = get_object_or_404(BlogPost, slug=slug)
@@ -35,7 +35,7 @@ def detail_blog_view(request):
 	return render(request, 'blog/detail_blog.html',context)	
 
 
-def edit_blog_view(request,slug):
+def edit_blog_view(request, slug):
 	context={}
 
 	user = request.user
@@ -49,22 +49,22 @@ def edit_blog_view(request,slug):
 
 
 	if request.POST:
-		form = UpdateBlogPostForms(request.POST or None, request.FILES or None,instance=blog_post)
+		form = UpdateBlogPostForm(request.POST or None, request.FILES or None,instance=blog_post)
 		if form.is_valid:
 			obj = form.save(commit=False) # load parameters into form, giving access to cleaned data
 			obj.save()
 			context['success_message'] = "Post successfully updated"
 			blog_post = obj
 
-		form = UpdateBlogPostForms(
-				initial = {
-					"title": blog_post.title,
-					"body": blog_post.body,
-					"image": blog_post.image,
-				}
-			)
-		context['form'] = form
-		return render(request,'blog/edit_blog.html',context)		
+	form = UpdateBlogPostForm(
+			initial = {
+				"title": blog_post.title,
+				"body": blog_post.body,
+				"image": blog_post.image,
+			}
+		)
+	context['form'] = form
+	return render(request,'blog/edit_blog.html',context)		
 
 
 def get_blog_queryset(query=None):
