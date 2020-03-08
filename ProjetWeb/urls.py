@@ -33,7 +33,8 @@ from account.views import(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage, name='homepage'), # homepage
-    path('timer/', views.timer, name='timer'),
+    path('scramble/', views.scramble, name='scramble'),
+    path('scramble/<type>', views.scrambler, name='scrambler'),
     path('contact/', views.contact, name='contact'),
     path('faq/', views.faq, name='faq'),
     path('about/', views.about, name='about'),

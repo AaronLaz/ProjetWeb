@@ -10,6 +10,7 @@ from blog.models import BlogPost
 from operator import attrgetter
 from blog.views import get_blog_queryset
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from pyTwistyScrambler import scrambler222, scrambler333, scrambler444, scrambler555
 
 BLOG_POSTS_PER_PAGE = 10
 
@@ -45,8 +46,23 @@ def homepage(request):
 
 	return render(request,'homepage.html',context)	
 
-def timer(request):
-	return render(request,'timer.html')	
+def scramble(request):
+	return render(request,'scramble.html')	
+
+def scrambler(request, type):
+	context ={}
+	if type==2:
+		scramble = scrambler222.get_WCA_scramble()
+	elif type==4:
+		scramble = scrambler444.get_WCA_scramble()
+	elif type==5:
+		scramble = scrambler555.get_WCA_scramble()
+	else: # default is 3x3
+		scramble = scrambler333.get_WCA_scramble() 
+
+	context['scramble'] = scramble				
+
+	return render(request,'scramble.html',context)		
 
 def faq(request):
 	return render(request,'faq.html')

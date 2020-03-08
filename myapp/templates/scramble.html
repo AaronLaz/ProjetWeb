@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<div class="d-flex flex-column">
+			
+			<h1>Cube Scrambler!</h1>
+			<p>This is the Cube Scrambler Page</p>
+			<p>It will generate random official WCA scrambles for 3x3 up to 5x5</p>
+
+			{% if scramble %}
+			<p> To generate a new scramble, please click on one of the buttons below</p>
+			<p class="m-auto">Scramble: {{scramble}}</p>
+			{% else %}
+			<p> To generate a new scramble, please click on one of the buttons below</p>
+			{% endif %}
+			<p class="m-auto scramble"><a class="btn btn-primary "href="{% url 'scrambler' type=2 %}" title="2x2">2x2</a></p>
+			<p class="m-auto scramble "><a class="btn btn-primary "href="{% url 'scrambler' type=3 %}" title="3x3">3x3</a></p>
+			<p class="m-auto scramble"><a class="btn btn-primary "href="{% url 'scrambler' type=4 %}" title="4x4">4x4</a></p>
+			<p class="m-auto scramble"><a class="btn btn-primary "href="{% url 'scrambler' type=5 %}" title="5x5">5x5</a></p>
+
+		</div>
+	</div>
+</div>
+{% endblock content %}
