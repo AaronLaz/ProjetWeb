@@ -203,3 +203,7 @@ body {
   display: block;
   margin: 10px;
 }
+
+.answer{
+  font-style: italic;
+}

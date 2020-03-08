@@ -35,7 +35,6 @@ urlpatterns = [
     path('', views.homepage, name='homepage'), # homepage
     path('scramble/', views.scramble, name='scramble'),
     path('scramble/<type>', views.scrambler, name='scrambler'),
-    path('contact/', views.contact, name='contact'),
     path('faq/', views.faq, name='faq'),
     path('about/', views.about, name='about'),
     path('blog/', include('blog.urls','blog')),
