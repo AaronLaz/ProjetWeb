@@ -3,5 +3,8 @@ from django.contrib import admin
 from blog.models import BlogPost, Comment
 # Register your models here.
 
-admin.site.register(BlogPost)
+class BlogAdmin(admin.ModelAdmin):
+	prepopulated_fields = {'slug': ('title',)}
+
+admin.site.register(BlogPost, BlogAdmin)
 admin.site.register(Comment)

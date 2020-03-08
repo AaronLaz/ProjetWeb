@@ -1,0 +1,4 @@
+
+import rope.base.project
+myproject = rope.base.project.Project('D:/Desktop/Projet Web/ProjetWeb/ProjetWeb/')
+myproject.close()

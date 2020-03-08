@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 
 from account.models import Account
 
-class RegistrationForm(UserCreationForm):
+class registration_form(UserCreationForm):
 	email = forms.EmailField(max_length=60, help_text='Please add a valid email address')
 
 	class Meta:
@@ -12,7 +12,7 @@ class RegistrationForm(UserCreationForm):
 		fields = ("email", "username", "password1","password2")
 
 
-class AuthenticationForm(forms.ModelForm):
+class authentication_form(forms.ModelForm):
 	password = forms.CharField(label='Password',widget=forms.PasswordInput)
 
 	class Meta:
@@ -26,7 +26,7 @@ class AuthenticationForm(forms.ModelForm):
 			if not authenticate(email=email,password=password):
 				raise forms.ValidationError("Wrong credentials")
 
-class UpdateForm(forms.ModelForm):
+class update_form(forms.ModelForm):
 
 	class Meta:
 		model = Account

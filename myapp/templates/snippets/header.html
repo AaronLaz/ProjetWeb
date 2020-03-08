@@ -1,8 +1,11 @@
 
+{% load static %}
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <!-- HEADER -->
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+	<img class="mr-2" src="{% static 'cube_logo.png' %}" width="36" height="26">
 {% if request.user.is_authenticated %}
   <h5 class="my-0 mr-md-auto font-weight-normal">Hello, {{request.user.username}}</h5>
  {% else %}
@@ -22,8 +25,11 @@
 	<a class="p-2 text-dark" href="{% url 'scramble' %}">Scrambler</a> |
 	<a class="p-2 text-dark" href="{% url 'about' %}">About</a> |
 	<a class="p-2 text-dark" href="{% url 'faq' %}">FAQ</a> 
-	</nav>
 	{% if request.user.is_authenticated %}
+		{% if request.user.is_admin %}
+			<a class="p-2 text-dark" href="{% url 'userlist' %}"> List of users</a>
+		{% endif %}
+	</nav>	
 	<a class="btn btn-outline-primary" href="{% url 'account' %}">Edit profile</a> 
 	<a class="btn btn-outline-primary" href="{% url 'logout' %}">Logout</a>
 	{% else %}
@@ -33,8 +39,11 @@
 </div>	
 
 <!-- force value change with javascript because value parameter of search form is not working -->
+{% url 'homepage' as home_url %}
+{% if request.get_full_path == home_url %}
 <script type="text/javascript">
 	document.getElementById("id_q").value = "{{query}}"
 </script>
+{% endif %}
 
 <!-- HEADER -->

@@ -13,7 +13,7 @@
 			<div class="d-lg-none mb-3">
 				<div class="card m-auto d-flex flex-column p-3">
 					<img class="img-fluid d-block m-auto pb-2" src="{% static 'cube_logo.png' %}" width="72" height="72">
-					<p class="lead">Lorem ipsum dolor</p>
+					<p class="lead">Cube Helper is a cubing site to help new and experienced cubers alike, sharing helpful resources and tips</p>
 					{% if user.is_admin %}
 						<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Create new post</a></p>
 					{% else %}
@@ -48,7 +48,7 @@
 
 			<div class="card create-post-bar d-flex flex-column p-3">
 				<img class="img-fluid d-block m-auto pb-2" src="{% static 'cube_logo.png' %}" width="72" height="72">
-				<p class="lead">Lorem ipsum dolor</p>
+				<p class="lead">Cube Helper is a cubing site to help new and experienced cubers alike, sharing helpful resources and tips</p>
 				{% if user.is_admin %}
 					<p class="m-auto"><a class="btn btn-primary" href="{% url 'blog:create' %}">Create new post</a></p>
 				{% else %}
