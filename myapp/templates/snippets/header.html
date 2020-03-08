@@ -8,12 +8,14 @@
  {% else %}
  <h5 class="my-0 mr-md-auto font-weight-normal">Welcome to Cube Helper</h5>
  {% endif %}
-
+{% url 'homepage' as home_url %}
+{% if request.get_full_path == home_url %}
 <div class="search_bar mt-sm-2 mr-2">
 	<form method="get">
 		<input type="text" class="form-control" name="q" id="id_q" placeholder="Search">
 	</form>
 </div>
+{% endif %}
 
   <nav class="my-2 my-md-0 mr-md-3">
 	<a class="p-2 text-dark" href="{% url 'homepage' %}">Home</a> |
